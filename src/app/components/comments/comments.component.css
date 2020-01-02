@@ -1,0 +1,42 @@
+.comment-log{
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.47);
+  background: #fff;
+  padding: 10px;
+}
+.comment-log .chat .direct-chat-info {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+.comment-log .chat .comments {
+  width: 50% !important;
+  float: right;
+  color: #999;
+}
+.comment-log .chat .direct-chat-img {
+  border-radius: 50%;
+  float: left;
+  width: 40px;
+  height: 40px;
+}
+.comment-log .chat .direct-chat-text {
+  border-radius: 5px;
+  position: relative;
+  padding: 5px 10px;
+  background: #d2d6de;
+  border: 1px solid #d2d6de;
+  margin: 5px 0 0 50px;
+  color: #444;
+  font-size: 14px;
+}
+.comment-log .panel-footer .btn{
+width:100%;
+}
+.chat::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.heading_status{
+  font-weight: 600;
+}

@@ -1,0 +1,128 @@
+<div class="row heading">
+  <div class="col-md-5">
+    <h5>Lead Details:{{data.ProductName}}({{data.LeadId}})<span
+        *ngIf="data.Utm_Source">(Source:{{data.Utm_Source}})</span></h5>
+  </div>
+  <div class="col-md-3">
+    <ng-container *ngIf="offers && offers.length">Offer Active</ng-container>
+    <ng-container *ngIf="offers && !offers.length">Offer Inactive</ng-container>
+  </div>
+  <div class="col-md-2">
+    <div (click)="viewClaimCrm()">View Claim</div>
+  </div>
+  <div class="col-md-2" (click)="openAuditTrailModal()">Audit Trail</div>
+
+</div>
+<div class="row heading">
+  <div class="col-md-10">
+  </div>
+  <div class="col-md-2" *ngIf="data.InvoiceUrl">
+    <a href="{{data.InvoiceUrl}}" target="_blank">View Invoice</a>
+  </div>
+</div>
+
+<form class="form" [formGroup]="leadForm" (ngSubmit)="updateLeadDetails()" *ngIf="models">
+  <div class="row">
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Make</label>
+        <select input class="form-control" formControlName="MakeName" [disableControl]="!edit"
+          (change)="changeMake($event.target.value)">
+          <option value="">Select</option>
+          <option *ngFor="let make of AllMake" [selected]="data.MakeName === make.MakeName">{{make.MakeName}}</option>
+        </select>
+      </app-qfc-input>
+      <!-- <app-qfc-input>
+        <label label class="form-control-placeholder">Make</label>
+        <select input class="form-control">
+          <option value="">Select</option>
+          <option *ngFor="let make of AllMake" [selected]="data.MakeName === make.MakeName" [value]="make">{{make.MakeName}}</option>
+        </select>
+      </app-qfc-input> -->
+
+    </div>
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Model</label>
+        <select input class="form-control" formControlName="ModelName" [disableControl]="!edit"
+          (change)="changeModel($event.target.value)">
+          <option value="">Select</option>
+          <option *ngFor="let model of models" [selected]="data.ModelName === model.ModelName">{{model.ModelName}}
+          </option>
+        </select>
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4" *ngIf="!IsClaimLead">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Follow Up</label>
+        <input input type="text" class="form-control" formControlName="FollowUpDateTime" required
+          [disableControl]="true">
+      </app-qfc-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Status(Substatus)</label>
+        <input input type="text" class="form-control" formControlName="Status" required [disableControl]="true">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-8">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Location</label>
+        <input input type="text" id="leadAddress" class="form-control" formControlName="Location" required
+          [disableControl]="true">
+      </app-qfc-input>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">RegistrationNo</label>
+        <input input type="text" class="form-control" formControlName="RegistrationNo" required
+          [disableControl]="!edit">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4" *ngIf="!IsClaimLead && statusDetail.StatusId < 3 || statusDetail.StatusId == 6">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Future prospect Date</label>
+        <input input type="date" class="form-control" formControlName="ReachOutDate" [min]="today" required
+          [disableControl]="!edit">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Fuel Type</label>
+        <select input class="form-control" formControlName="FuelType" [disableControl]="!edit"
+          (change)="changeModel($event.target.value)">
+          <option value="">Select</option>
+          <option *ngFor="let fuel of fuelTypeMaster" [selected]="data.FuelType === fuel.FuelType">{{fuel.FuelType}}
+          </option>
+        </select>
+      </app-qfc-input>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4" *ngIf="!IsClaimLead">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Present KM run</label>
+        <input input type="text" class="form-control" formControlName="CurrentKM" required [disableControl]="true">
+
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4" *ngIf="!IsClaimLead">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">KM at last servicing</label>
+        <input input type="text" class="form-control" formControlName="LastKM" required [disableControl]="true">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary" *ngIf="!edit" (click)="edit=!edit;mapInit()">Edit</button>
+      <button class="btn btn-primary save" *ngIf="edit">Save</button>
+      <button class="btn btn-primary cancel" *ngIf="edit" (click)="edit=!edit">Cancel</button>
+    </div>
+  </div>
+</form>

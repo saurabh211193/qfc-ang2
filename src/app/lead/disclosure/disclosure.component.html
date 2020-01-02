@@ -1,0 +1,24 @@
+<div class="container-fluid pop_window">
+  <div>
+    <div class="row popup-heading">
+      <div class="col-md-9">
+        <h5>Disclosure</h5>
+      </div>
+      <div class="col-md-3">
+        <button (click)="close()"><span>X</span></button>
+      </div>
+      <div class="col-md-12">
+        <p *ngIf="data.serviceDate && data.billValue">Hi!, this is to verify that your
+          {{data.carName}} with registration no. {{data.vehicleNo}} has been serviced at an
+          amount of {{data.billValue}} from {{data.garageName}} on {{data.serviceDate}}.
+          Please confirm your service completion.</p>
+        <p *ngIf="!data.serviceDate || !data.billValue">Please update your database with serviced on date and amount.
+        </p>
+      </div>
+      <div class="col-md-12">
+        <button type="submit" [disabled]="!data.serviceDate && !data.billValue" class="btn btn-primary"
+          (click)="submit()">Submit & Update Status</button>
+      </div>
+    </div>
+  </div>
+</div>

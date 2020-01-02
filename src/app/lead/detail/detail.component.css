@@ -1,0 +1,44 @@
+.container-fluid {
+  background: #eee;
+}
+
+.container-fluid .col-md-9 {
+  max-width: 73.1%;
+  margin: 0 16px 0 0px;
+  padding: 0;
+}
+
+.container-fluid .col-md-9 .section-A {
+  padding: 10px 10px;
+  border-top: 2px solid #ff8214;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.47);
+  background: #fff;
+  margin: 0 0 10px 0;
+}
+.container-fluid .row>.col-md-3{
+padding: 0;
+}
+.status-log {
+  border-top: 2px solid #ff8214;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.47);
+  padding: 10px;
+  background: #fff;
+  margin: 0 0 10px 0;
+}
+
+.status-log .btn-primary {
+  width: 100%;
+}
+
+form {
+  padding-top: 15px;
+}
+
+.status-log .form-control {
+  margin-bottom: 10px;
+}
+
+.heading_status{
+  font-weight: 600;
+}
+

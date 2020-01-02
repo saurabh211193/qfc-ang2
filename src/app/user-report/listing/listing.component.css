@@ -1,0 +1,4 @@
+.table tbody tr td:nth-child(1) {
+  color: #ff8214;
+  cursor: pointer;
+}

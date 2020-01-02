@@ -1,0 +1,26 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="text-center">Agent ID </th>
+      <th class="text-center"> Name </th>
+      <th class="input_align"> Bucket Size </th>
+      <th class="input_align"> Daily Limit </th>
+      <th class="text-center"> Total Assignment </th>
+      <th class="text-center">Today Assignment </th>
+      <th class="text-center">Product Role </th>
+      <th class="text-center">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of userReport">
+      <td class="text-center" (click)="getUserReport(report.UserId)">{{report.LoginId}}</td>
+      <td class="text-center">{{report.Name}}</td>
+      <td class="input_align"><input type="text" [(ngModel)]="report.BucketSize" /></td>
+      <td class="input_align"><input type="text" [(ngModel)]="report.DailyLimit" /></td>
+      <td class="text-center">{{report.TotalAssigned}}</td>
+      <td class="text-center">{{report.TodayAssigned}}</td>
+      <td class="text-center" (click)="changeRole(report)">Edit</td>
+      <td class="text-center"><button class="btn btn-primary" (click)="saveUserReport(report)">Save</button></td>
+    </tr>
+  </tbody>
+</table>

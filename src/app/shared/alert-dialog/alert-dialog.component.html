@@ -1,0 +1,21 @@
+<div class="modal" style="display:block" id="myModal">
+  <div class="overlay" (click)="close()"></div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><span [innerHTML]="options.title"></span></h4>
+        <!-- <button class="close" *ngIf="options.cancelText" (click)="close()">&times;</button> -->
+      </div>
+
+      <div class="modal-body">
+        <span [innerHTML]="options.message"></span>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-primary" *ngIf="options.confirmText"
+          (click)="confirm()">{{options?.confirmText}}</button>
+        <!-- <button class="btn btn-danger" *ngIf="options.cancelText" (click)="close()">{{options?.cancelText}}</button> -->
+      </div>
+    </div>
+  </div>
+</div>

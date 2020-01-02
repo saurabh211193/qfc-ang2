@@ -1,0 +1,30 @@
+<div class="container-fluid pop_window">
+  <div>
+    <div class="row popup-heading">
+      <div class="col-md-9">
+        <h5>Booking</h5>
+      </div>
+      <div class="col-md-3">
+        <button (click)="close()"><span>X</span></button>
+      </div>
+    </div>
+    <form class="form">
+      <div class="row">
+        <div class="col-md-4">
+
+          <app-multiselect-dropdown input [settings]="multiselect_dropdown" [data]="products"
+            [selected_data]="selected_products" (getSelectedItem)="getItems($event)">
+          </app-multiselect-dropdown>
+
+        </div>
+
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary save" (click)="updateUserProduct()">Save</button>
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+
+</div>

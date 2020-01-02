@@ -1,0 +1,21 @@
+<div class="comment-log">
+  <form [formGroup]="commentForm" (ngSubmit)="save()" class="panel panel-default">
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="comment" class="heading_status">Comment:</label>
+        <textarea class="form-control" rows="5" id="comment" formControlName="Comments"></textarea>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <button type="submit" class="btn btn-primary">Add Comment</button>
+    </div>
+  </form>
+  <div class="chat" *ngFor="let comment of comments">
+    <div class="direct-chat-info clearfix">
+      <span class="user_name">{{comment.Name}}</span>
+      <span class="pull-right comments">{{comment.CreatedOn | date: "dd/MM/yyyy h:mm a"}}</span>
+    </div>
+    <img alt="Message User Image" class="direct-chat-img" src="assets/images/user.png">
+    <div class="direct-chat-text">{{comment.Comments}}</div>
+  </div>
+</div>

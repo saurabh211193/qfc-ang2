@@ -1,0 +1,19 @@
+div h5{
+  margin-bottom: 18px;
+}
+.col-md-4 .btn-primary{
+  margin:0 5px;
+}
+.heading{
+  margin-bottom:15px;
+}
+.heading .col-md-7{
+  text-align:right;
+}
+.heading .col-md-7 .btn{
+  margin-left:10px;
+}
+
+.col-md-6 button{
+  margin:0 5px;
+}

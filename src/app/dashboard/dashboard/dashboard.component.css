@@ -1,0 +1,14 @@
+.main_panel .col-a-2{
+  width:5%;
+}
+.main_panel .col-b-10{
+  width:95%;
+}
+.main_panel .col-a{
+  float:left;
+}
+.main-side{
+  background:#fff;
+  padding: 0px 0 0px 0;
+  margin: 5px 5px 0 0px;
+}

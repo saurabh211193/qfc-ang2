@@ -1,0 +1,57 @@
+<div class="container-fluid pop_window">
+  <div>
+    <div class="row popup-heading">
+      <div class="col-md-9">
+        <h5>Garage List</h5>
+      </div>
+      <div class="col-md-3">
+        <button (click)="close()"><span>X</span></button>
+      </div>
+    </div>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Garage</th>
+          <th>Address</th>
+          <th>Distance(in Km)</th>
+          <th>Status</th>
+          <th>Preferred</th>
+          <!-- <th>Total Insurer Share</th>
+          <th>Total Customer Share</th>
+          <th>Total</th> -->
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let garage of garageList">
+          <td>{{garage.Name}}</td>
+          <td>{{garage.Address}}</td>
+          <td>{{garage.dist | number : '1.1-1'}}</td>
+          <td>
+            <ng-container *ngIf="garage.StatusId == 1 || garage.StatusId == null">
+              <span class="garage-list-anchor_edit">
+                Not Registered
+              </span>
+            </ng-container>
+            <ng-container *ngIf="garage.StatusId == 2">
+              <span class="garage-list-anchor_register">
+                Registered
+              </span>
+            </ng-container>
+            <ng-container *ngIf="garage.StatusId == 3">
+              <span class="garage-list-anchor_rejected">Rejected</span>
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="garage.IsPreferred">Yes</ng-container>
+            <ng-container *ngIf="!garage.IsPreferred">No</ng-container>
+          </td>
+          <!-- <td>{{garage.totalInsurerShare}}</td>
+          <td>{{garage.totalCustomerShare}}</td>
+          <td>{{garage.total}}</td> -->
+          <td><button class="btn btn-primary" (click)="saveCustomerSelection(garage.GarageId)">Add</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

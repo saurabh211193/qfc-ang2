@@ -1,0 +1,28 @@
+div h5 {
+  margin-bottom: 18px;
+}
+
+.col-md-4 .btn-primary {
+  margin: 0 5px;
+}
+
+.row.heading {
+  margin-bottom: 20px;
+}
+
+.row.heading .col-md-2 {
+  text-align: right;
+  color: #ff8214;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+
+.row.heading .col-md-9 {
+  text-align: left;
+  color: #ff8214;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}

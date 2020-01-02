@@ -1,0 +1,125 @@
+<div class="container-fluid garage-list">
+  <form class="" [formGroup]="filterForm" (ngSubmit)="getAssignedGarages()">
+    <div class="row">
+      <div class="col-md-1">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Id</label>
+          <input input type="number" class="form-control" formControlName="garageid" [value]="" min="0">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Name</label>
+          <input input type="text" class="form-control" formControlName="garagename">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">City</label>
+          <select input class="form-control" formControlName="city">
+            <option value="">Select</option>
+            <option *ngFor="let city of cities" value="{{city.Name}}">{{city.Name}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Pincode</label>
+          <input input type="text" class="form-control" formControlName="pincode">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Status</label>
+          <select input class="form-control" formControlName="isagree">
+            <option value="">Select</option>
+            <option *ngFor="let stat of status" value="{{stat.id}}">{{stat.name}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Garages per page</label>
+          <select input class="form-control" formControlName="count">
+            <option value="">Select</option>
+            <option *ngFor="let page of pages" value="{{page}}">{{page}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="row">
+    <div class="col-md-3">
+      <app-qfc-input>
+        <input input id="cin" name="cin" type="file" (change)="fileChangeEvent($event)"
+          placeholder="Upload a file..." />
+      </app-qfc-input>
+    </div>
+    <div class="col-md-3">
+      <button type="button" class="form-button btn btn-primary" (click)="uploadBulkGarageFile()">
+        <i class="glyphicon glyphicon-open-file"></i>&nbsp;Upload
+      </button>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>City
+          <span class="sort_up">
+
+            <span class="up-arrow" (click)="sortGarageList('City',1)"></span>
+            <span class="down-arrow" (click)="sortGarageList('City',0)"></span>
+          </span>
+        </th>
+        <th>Garage Type</th>
+        <th>Pincode
+          <span class="sort_up">
+            <span class="up-arrow" (click)="sortGarageList('Pincode',1)"></span>
+            <span class="down-arrow" (click)="sortGarageList('Pincode',0)"></span>
+
+          </span>
+        </th>
+        <th>Status</th>
+        <th>Profile Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let garage of garages">
+        <td><a (click)="getGarageDetail(garage.GarageId)"
+            style="cursor: pointer;color: #007bff;">{{garage.GarageId}}</a></td>
+        <td>{{garage.Name}}</td>
+        <td>{{garage.City}}</td>
+        <td>{{garage.GarageType}}</td>
+        <td>{{garage.Pincode}}</td>
+        <td>
+          <ng-container *ngIf="garage.StatusId == 1 || garage.StatusId == null"><span
+              class="garage-list-anchor_edit">Not
+              Registered
+            </span></ng-container>
+          <ng-container *ngIf="garage.StatusId == 2"><span class="garage-list-anchor_register">
+              Registered</span></ng-container>
+          <ng-container *ngIf="garage.StatusId == 3"><span class="garage-list-anchor_rejected">Rejected</span>
+          </ng-container>
+        </td>
+        <td>
+          <!-- <ng-container *ngIf="garage.StatusId == 1 || garage.StatusId == null"><span class="garage-list-anchor_edit">
+            </span></ng-container> -->
+          <ng-container *ngIf="garage.StatusId == 2"><span class="garage-list-anchor_register">
+              <a style="cursor: pointer;color: blue;" (click)="viewGarage(garage.GarageId)">View</a></span>
+          </ng-container>
+          <!-- <ng-container *ngIf="garage.StatusId == 3"><span class="garage-list-anchor_rejected">Rejected</span>
+          </ng-container> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-pagination *ngIf="pagination.totalPages>1" [pagination]="pagination" (PageChange)="PageChanged($event)">
+  </app-pagination>
+</div>

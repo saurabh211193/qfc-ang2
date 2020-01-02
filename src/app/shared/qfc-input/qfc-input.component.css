@@ -1,0 +1,43 @@
+:host /deep/ .form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+:host /deep/ .form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  /* opacity: 0.5; */
+  cursor: text;
+}
+
+/* :host /deep/ .form-control:focus+.form-control-placeholder,
+:host /deep/ .form-control:valid+.form-control-placeholder {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+:host /deep/ .form-control:focus~.form-control-placeholder,
+:host /deep/ .form-control:valid~.form-control-placeholder {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+} */
+
+:host /deep/ .form-control +.form-control-placeholder{
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+:host /deep/ .form-group.form-control-placeholder{
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+input.form-control.ng-untouched.ng-pristine.ng-invalid+.form-control-placeholder {
+  font-size: 75% !important;
+  -webkit-transform: translate3d(0, -100%, 0) !important;
+  transform: translate3d(0, -100%, 0) !important;
+  opacity: 1 !important;
+}

@@ -1,0 +1,192 @@
+<div class="container-fluid pop_window">
+  <div>
+    <div class="row popup-heading">
+      <div class="col-md-9">
+        <h5>Audit Trail</h5>
+      </div>
+      <div class="col-md-3">
+        <button (click)="close()"><span>X</span></button>
+      </div>
+    </div>
+    <ngb-tabset>
+      <ngb-tab title="Calling">
+        <ng-template ngbTabContent>
+          <table class="table table-bodered">
+            <thead>
+              <tr>
+                <th scope="col">CallType</th>
+                <th scope="col">MobileNo</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Talktime</th>
+                <th scope="col">Disposition</th>
+                <th scope="col">Date</th>
+                <th scope="col">Action By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let call of leadCallDetail">
+                <td>{{call.CallType}}</td>
+                <td>{{call.MobileNo | mask}}</td>
+                <td>{{call.Duration }}</td>
+                <td>{{call.Talktime }}</td>
+                <td>{{call.Disposition}}</td>
+                <td>{{call.CreatedOn | date: "dd/MM/yyyy h:mm a"}}</td>
+                <td *ngIf="call.EmployeeId">{{call.Name}}({{call.EmployeeId}})</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Callbacks</ng-template>
+        <ng-template ngbTabContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Callback Time</th>
+                <th scope="col">FollowUp With</th>
+                <th scope="col">Action By</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let call of leadCallback">
+                <td>{{call.FollowUpDateTime}}</td>
+                <td>{{call.FollowUpWith}}</td>
+                <td>{{call.Name}}({{call.EmployeeId}})</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Assignment</ng-template>
+        <ng-template ngbTabContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Assigned To User</th>
+                <th scope="col">Assigned By User</th>
+                <th scope="col">Assigned On</th>
+                <th scope="col">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of leadAssignedUser">
+                <td *ngIf="user.AssignedToEmployeeId">{{user.AssignedToName}}({{user.AssignedToEmployeeId}})</td>
+                <td *ngIf="user.AssignedToEmployeeId">{{user.AssignedByName}}({{user.AssignedByEmployeeId}})</td>
+                <td *ngIf="user.AssignedToEmployeeId">{{user.AssignedOn | date:'fullDate' }}</td>
+                <td *ngIf="user.AssignedToEmployeeId">{{user.AssignedOn | date:'shortTime'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Communication</ng-template>
+        <ng-template ngbTabContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">MobileNo</th>
+                <th scope="col">Message</th>
+                <th scope="col">Target</th>
+                <th scope="col">CreatedOn</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let comm of leadCommDetail">
+                <td>{{comm.MobileNo | mask}}</td>
+                <td>{{comm.Message}}</td>
+                <td><span *ngIf="comm.Target === 'c'">Customer</span></td>
+                <td>{{comm.CreatedOn | date:'fullDate'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle>Last Action</ng-template>
+        <ng-template ngbTabContent>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Source</th>
+                <th scope="col">Field</th>
+                <th scope="col">Old Value</th>
+                <th scope="col">New Value</th>
+                <th scope="col">Created ON</th>
+                <th scope="col">Action By</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let audit of leadAudit">
+                <td>{{audit.Source}}</td>
+                <td>{{audit.Field}}</td>
+                <td>{{audit.OldValue}}</td>
+                <td>{{audit.NewValue}}</td>
+                <td>{{audit.CreatedOn | date : 'fullDate'}}</td>
+                <td>{{audit.Name}}({{audit.EmployeeId}})</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+    <!-- <ngb-tabset>
+    <ngb-tab title="Calling">
+      <ng-template ngbTabContent>
+        <table class="table table-bodered">
+          <thead>
+            <tr>
+              <th scope="col">CallType</th>
+              <th scope="col">MobileNo</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Talktime</th>
+              <th scope="col">Disposition</th>
+              <th scope="col">Date</th>
+              <th scope="col">Action By</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let call of leadCallDetail">
+              <td>{{call.CallType}}</td>
+              <td>{{call.MobileNo}}</td>
+              <td>{{call.Duration }}</td>
+              <td>{{call.Talktime }}</td>
+              <td>{{call.Disposition}}</td>
+              <td>{{call.CreatedOn | date: "dd/MM/yyyy h:mm a"}}</td>
+              <td *ngIf="call.EmployeeId">{{call.Name}}({{call.EmployeeId}})</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+      <ng-template ngbTabTitle>Callbacks</ng-template>
+      <ng-template ngbTabContent>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Callback Time</th>
+              <th scope="col">FollowUp With</th>
+              <th scope="col">Action By</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let call of leadCallback">
+              <td>{{call.FollowUpDateTime}}</td>
+              <td>{{call.FollowUpWith}}</td>
+              <td>{{call.Name}}({{call.EmployeeId}})</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </ngb-tab>
+
+
+
+  </ngb-tabset> -->
+  </div>
+</div>

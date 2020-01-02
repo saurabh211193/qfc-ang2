@@ -1,0 +1,64 @@
+<div class="container-fluid pop_window">
+  <div>
+    <div class="row popup-heading">
+      <div class="col-md-9">
+        <h5>Booking</h5>
+      </div>
+      <div class="col-md-3">
+        <button (click)="close()"><span>X</span></button>
+      </div>
+    </div>
+    <form class="form" [formGroup]="bookingForm" (ngSubmit)="saveBooking()" *ngIf="data">
+      <div class="row">
+        <div class="col-md-4">
+
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="PickupDate">PickUp Date</label>
+            <input input type="date" class="form-control" formControlName="PickupDate" required>
+          </app-qfc-input>
+
+        </div>
+        <div class="col-md-4">
+          <app-qfc-input>
+            <label label class="form-control-placeholder">PickUp Time</label>
+            <select input class="form-control" formControlName="PickupTime">
+              <option value="">Select</option>
+              <option *ngFor="let timings of pickdroptimings">{{timings}}</option>
+            </select>
+          </app-qfc-input>
+        </div>
+
+        <div class="col-md-4">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="CustomerName">Name</label>
+            <input input type="text" class="form-control" formControlName="CustomerName" required>
+          </app-qfc-input>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="Address">Address</label>
+            <input input type="text" class="form-control" formControlName="Address" required>
+          </app-qfc-input>
+        </div>
+        <div class="col-md-4">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="Email">Email</label>
+            <input input type="text" class="form-control" formControlName="Email" required>
+          </app-qfc-input>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <button type="submit" class="btn btn-primary save">Save</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>

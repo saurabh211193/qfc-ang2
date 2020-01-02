@@ -1,0 +1,503 @@
+<div class="container-fluid detail-page">
+  <div class="row">
+    <div class="col-md-9 split-section">
+      <form class="form" [formGroup]="garageForm" (ngSubmit)="submit()" *ngIf="garageDetail && garageForm">
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="Name">Garage Name</label>
+              <input input type="text" class="form-control" formControlName="Name" required>
+              <span error class="error" *ngIf="formErrors.Name">{{formErrors.Name}}</span>
+            </app-qfc-input>
+          </div>
+
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="Locality">Address</label>
+              <input input type="text" class="form-control" formControlName="Locality" required>
+              <span error class="error" *ngIf="formErrors.Locality">{{formErrors.Locality}}</span>
+            </app-qfc-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="Address">Location</label>
+              <input input type="text" class="form-control" formControlName="Address" id="garageAddress"
+                (focus)="mapInit()" required>
+              <span error class="error" *ngIf="formErrors.Address">{{formErrors.Address}}</span>
+            </app-qfc-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="State">State</label>
+              <input input type="text" class="form-control" formControlName="State" required>
+              <span error class="error" *ngIf="formErrors.State">{{formErrors.State}}</span>
+            </app-qfc-input>
+          </div>
+
+          <div class="col-md-6">
+            <!-- <app-qfc-input>
+              <label label class="form-control-placeholder" for="City">City</label>
+              <input input type="text" class="form-control" formControlName="City" required>
+              <span error class="error" *ngIf="formErrors.City">{{formErrors.City}}</span>
+            </app-qfc-input> -->
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="City">City: {{(garageDetail.City)}}</label>
+              <select class="form-control" input formControlName="CityId">
+                <option value="">Select</option>
+                <option *ngFor='let city of cities' [value]="city.CityId">
+                  {{city.Name}}
+                </option>
+              </select>
+              <span error class="error" *ngIf="formErrors.City">{{formErrors.City}}</span>
+            </app-qfc-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="Pincode">Pincode</label>
+              <input input type="text" class="form-control" formControlName="Pincode" required>
+              <span error class="error" *ngIf="formErrors.Pincode">{{formErrors.Pincode}}</span>
+            </app-qfc-input>
+          </div>
+
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="LandLineNo">LandLineNo</label>
+              <input input type="text" class="form-control" formControlName="LandLineNo" required>
+              <span error class="error" *ngIf="formErrors.LandLineNo">{{formErrors.LandLineNo}}</span>
+            </app-qfc-input>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="ContactPersonName">ContactPersonName</label>
+              <input input type="text" class="form-control" formControlName="ContactPersonName" required>
+              <span error class="error" *ngIf="formErrors.ContactPersonName">{{formErrors.ContactPersonName}}</span>
+            </app-qfc-input>
+          </div>
+
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="ContactPersonMobileNo">ContactPersonMobileNo</label>
+              <input input type="text" class="form-control" formControlName="ContactPersonMobileNo"
+                [attr.disabled]="userDetails.UserType != 2 ? '' : null" required>
+              <span error class="error"
+                *ngIf="formErrors.ContactPersonMobileNo">{{formErrors.ContactPersonMobileNo}}</span>
+            </app-qfc-input>
+            <a><i class="fa fa-phone" (click)="dialerCall(garageDetail.ContactPersonMobileNo,'qfcpartner')"></i></a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder"
+                for="AlternateContactPersonName">AlternateContactPersonName</label>
+              <input input type="text" class="form-control" formControlName="AlternateContactPersonName">
+              <!-- <span error class="error" *ngIf="formErrors.AlternateContactPersonName">{{formErrors.AlternateContactPersonName}}</span> -->
+            </app-qfc-input>
+          </div>
+
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="AlternateNo">AlternateNo</label>
+              <input input type="number" class="form-control" formControlName="AlternateNo">
+              <!-- <span error class="error" *ngIf="formErrors.AlternateNo">{{formErrors.AlternateNo}}</span> -->
+            </app-qfc-input>
+            <a><i class="fa fa-phone" (click)="dialerCall(garageDetail.AlternateNo,'qfcpartner')"></i></a>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="EmailId">EmailId</label>
+              <input input type="text" class="form-control" formControlName="EmailId" required>
+              <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span>
+            </app-qfc-input>
+          </div>
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="EmailId">Make</label>
+              <app-multiselect-dropdown input [settings]="multiselect_dropdown" [data]="makes"
+                [selected_data]="selectedMake" (getSelectedItem)="getItems($event)">
+              </app-multiselect-dropdown>
+              <!-- <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span> -->
+            </app-qfc-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="PickUpRadius">PickUp Radius</label>
+              <input input type="number" class="form-control" formControlName="PickUpRadius" maxlength="2"
+                minlength="0">
+              <span error class="error" *ngIf="formErrors.PickUpRadius">{{formErrors.PickUpRadius}}</span>
+            </app-qfc-input>
+          </div>
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="EmailId">Insurer Cashless tie-ups</label>
+              <app-multiselect-dropdown input [settings]="multiselect_dropdown_insurer" [data]="insurerMaster"
+                [selected_data]="selectedInsurer" (getSelectedItem)="getInsurerItems($event)">
+              </app-multiselect-dropdown>
+              <!-- <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span> -->
+            </app-qfc-input>
+          </div>
+
+
+
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="Franchise">Franchise</label>
+              <select class="form-control" input required [(ngModel)]="franchiseObj"
+                [ngModelOptions]="{standalone: true}">
+                <option value="">Select</option>
+                <option *ngFor='let franchise of franchiseMaster' [value]="franchise.FranchiseName">
+                  {{franchise.FranchiseName}}
+                </option>
+              </select>
+            </app-qfc-input>
+          </div>
+          <div class="col-md-6">
+            <div class="row pick-drop">
+              <label class="col-md-4" for="EmailId">Towing facility</label>
+              <div class="radio col-md-6">
+                <label><input type="radio" value="1" formControlName="IsTowProvided" id="1">Yes</label>
+                <label><input type="radio" value="0" formControlName="IsTowProvided" id="0">No</label>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-6">
+            <div class="row pick-drop">
+              <label class="col-md-4" for="EmailId">Is Allowed To Update USP</label>
+              <div class="radio col-md-6">
+                <label><input type="radio" value="1" formControlName="IsAllowedUpdateUsp" id="1">Yes</label>
+                <label><input type="radio" value="0" formControlName="IsAllowedUpdateUsp" id="0">No</label>
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row pick-drop">
+              <label class="col-md-3" for="EmailId">Preferred</label>
+              <div class="radio col-md-6">
+                <label><input type="radio" value="1" formControlName="IsPreferred" id="Yes">Yes</label>
+                <label><input type="radio" value="0" formControlName="IsPreferred" id="No">No</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="name">Status</label>
+              <select input class="form-control" formControlName="StatusId"
+                [attr.disabled]="userDetails.UserType != 2 ? '' : null" (change)="changeClaimStatus()">
+                <option value="null">Select</option>
+                <option *ngFor="let status of garageStatusMaster" [value]="status.StatusId"
+                  [selected]="status.StatusId == garageStatus.StatusId">{{status.StatusName}}</option>
+              </select>
+            </app-qfc-input>
+          </div>
+          <!-- <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="EmailId">Make</label>
+              <app-multiselect-dropdown input [settings]="multiselect_dropdown" [data]="makes" [selected_data]="selectedMake"
+                (getSelectedItem)="getItems($event)">
+              </app-multiselect-dropdown>
+            </app-qfc-input>
+          </div> -->
+        </div>
+        <div class='row'>
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="LoginMobileNo">LoginMobileNo</label>
+              <input input type="text" class="form-control" formControlName="LoginMobileNo" required>
+              <span error class="error" *ngIf="formErrors.LoginMobileNo">{{formErrors.LoginMobileNo}}</span>
+            </app-qfc-input>
+          </div>
+
+          <div class="col-md-6">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="name">Garage Status</label>
+              <select input class="form-control" [(ngModel)]="garageType" [ngModelOptions]="{standalone: true}"
+                (change)="getGarageTypeValidation()">
+                <option value="">Select</option>
+                <option value="1">Partner</option>
+                <option value="2">Online Agreed</option>
+                <option value="3">Inactive</option>
+              </select>
+            </app-qfc-input>
+          </div>
+        </div>
+        <div class="row pick-drop">
+          <label class="col-md-3" for="EmailId">Pick Drop</label>
+          <div class="radio col-md-6">
+            <label><input type="radio" value="Yes" formControlName="PickDrop" id="Yes">Yes</label>
+            <label><input type="radio" value="No" formControlName="PickDrop" id="No">No</label>
+          </div>
+        </div>
+
+        <div class="row time-drop" *ngIf="garageForm.value.PickDrop === 'Yes'">
+          <label class="col-md-3">Pick Drop Timings</label>
+          <div class="col-md-3">
+            <span *ngFor="let time of pickupTimingMaster; let i = index">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" [checked]="checkPickupTimeCheckBox(time)"
+                  [value]="time.PickUpTime" (click)="changePickDropTiming($event.target.value)">{{time.PickUpTime}}
+              </label>
+            </span>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-sm" (click)="SavePickDropTiming()">Save Pick Drop
+              Timings</button>
+          </div>
+        </div>
+
+        <div class="row day-off">
+          <div class="col-md-3">
+            Days Off
+          </div>
+          <div class="col-md-9">
+            <div class="radio" input>
+              <label *ngFor="let day of days"><input type="radio" value="{{day}}" formControlName="DaysOff"
+                  id="{{day}}">{{day}}</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="row services">
+          <div class="col-md-3">
+            Services
+          </div>
+          <div class="col-md-9">
+            <div *ngFor="let service of services" class="details_service">
+              <span *ngIf="service.ServiceTypeId == '1'">
+                <app-qfc-input>
+                  <input input type="checkbox" (click)="addServices(service.services)"
+                    [checked]="checkedBasicService == '1' ? true : false ">
+                </app-qfc-input>
+                <label>{{service.ServiceTypeName}}</label>
+                <ul>
+                  <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                </ul>
+              </span>
+              <span *ngIf="service.ServiceTypeId == '2'">
+                <app-qfc-input>
+                  <input input type="checkbox" (click)="addServices(service.services)"
+                    [checked]="checkedStandardService == '2' ? true : false ">
+                </app-qfc-input>
+                <label>{{service.ServiceTypeName}}</label>
+                <ul>
+                  <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                </ul>
+              </span>
+              <span *ngIf="service.ServiceTypeId == '3'">
+                <app-qfc-input>
+                  <input input type="checkbox" (click)="addServices(service.services)"
+                    [checked]="checkedPremiumService == '3' ? true : false ">
+                </app-qfc-input>
+                <label>{{service.ServiceTypeName}}</label>
+                <ul>
+                  <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                </ul>
+              </span>
+              <span *ngIf="service.ServiceTypeId =='4' " class="addOn">AddOn Services
+                <div *ngFor="let item of service.services ">
+                  <app-qfc-input>
+                    <input input type="checkbox" (click)="addOtherServices(item.ServiceId) "
+                      [checked]="checkedAddonService.indexOf(item.ServiceId) == -1 ? false : true ">
+                  </app-qfc-input>
+                  <label>{{item.ServiceName}}</label>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div> -->
+
+
+        <div class="garage-table" *ngIf="garageDocDetails && garageDocDetails.length">
+          <h4>Documents</h4>
+          <table class="table table-bordered assignment-table">
+            <thead>
+              <tr>
+                <th>Document</th>
+                <th>File</th>
+                <th>Status</th>
+                <th>Parent Staus</th>
+                <th>Action</th>
+
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let garageDoc of garageDocDetails;let id1 = index">
+                <td>
+                  {{garageDoc.DocName}}
+                </td>
+                <td>
+                  <div *ngFor="let file of garageDoc.file;let id2=index">
+                    <ng-container *ngIf="file.Url">
+                      <div class="nested-field">
+                        <span style="word-break: break-all;">
+                          <a target="_blank" href="{{file.Url}}">
+                            {{file.FileName}}
+                            &nbsp;&nbsp;<i class="fa fa-file-pdf-o" style="color:red"></i></a>
+                        </span>
+                        <div class="select-label">
+
+
+                          <select input class="form-control" [(ngModel)]="docStatusArr[id2+'status'+id1]"
+                            [ngModelOptions]="{standalone: true}">
+                            <ng-container *ngFor="let status of docStatusMaster">
+                              <option *ngIf="status.StatusId == 4 || status.StatusId == 5" [ngValue]="status">
+                                {{status.StatusName}}</option>
+                            </ng-container>
+                            <!-- <option  >
+                              {{status.StatusName}}
+                            </option> -->
+                          </select>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm"
+                          (click)="changeDocStatus(file,id2+'status'+id1,id1,file)">Go</button>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                </td>
+                <td *ngIf="garageDoc.CatStatusName">
+                  {{garageDoc.CatStatusName}}
+                </td>
+                <td *ngIf="!garageDoc.CatStatusName">
+                  Pending
+                </td>
+                <td>
+                  <ng-container>
+
+                    <select input class="form-control" [(ngModel)]="docCatStatusArr[id1]"
+                      [ngModelOptions]="{standalone: true}">
+                      <!-- <option value="">--Select--</option> -->
+                      <option *ngFor="let status of docStatusMaster" [ngValue]="status">
+                        {{status.StatusName}}
+                      </option>
+                    </select>
+                  </ng-container>
+
+
+
+                </td>
+                <td>
+                  <ng-container>
+                    <button type="button" class="btn btn-primary btn-sm"
+                      (click)="changeDocCatStatus(id1,docCatStatusArr[id1])"
+                      [disabled]="garageDoc.file.length <2">SAVE</button>
+                  </ng-container>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <app-agreements [garageProfile]="garageDetail" (uspUpdateEvent)="sendSmsToGarage()"></app-agreements>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="col-md-3 ">
+            Send Confirmation
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-sm" (click)="sendConfirmationMsg('sms')">SEND CONFIRMATION
+              SMS
+            </button>
+          </div>
+          <!-- <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-sm" (click)="sendConfirmationMsg('email')">SEND
+              CONFIRMATION
+
+            </button>
+          </div> -->
+          <div class="col-md-3 ">
+            <button type="button" class="btn btn-primary btn-sm " (click)="sendConfirmationMsg( 'email') ">SEND
+              CONFIRMATION
+              EMAIL
+            </button>
+          </div>
+        </div>
+        <div class="row term_row ">
+          <div class="col-md-12 Iagree" for="isAgreed">
+            <!-- <input type="checkbox" id="isAgreed" name="isAgreed" (change)="checkotp()" [(ngModel)]="IsAgree" required #isAgreed="ngModel"> -->
+            <label for="termsandconditions" class="bmd-label-floating">Please read and agree to the terms and
+              conditions
+              to proceed</label>
+
+            <div class="term_condition ">
+              <p>
+                1. Your account will be govern by these empanelment terms and conditions. You shall read the complete
+                <!-- <a href="assets/docs/QuickFixCars_Garage Operator_ClickWrap Agreement.docx" target="_self">-->
+                <a style="cursor: pointer;color: blue;" (click)="open()">
+                  Terms &
+                  Conditions</a> as the same form a binding
+                contract between
+                us and you.
+
+                <br /> 2. You shall be solely responsible to the customers/users of the Platform for the services
+                rendered
+                by you
+                <br /> 3. You have the necessary skill, expertise and personnel to provide the service. You shall
+                render
+                the services, at all times in accordance with applicable laws
+                <br /> 4. You have the necessary permissions and licenses to provide the services
+                <br /> 5. You shall appoint a SPOC who will be responsible for coordinating with us in respect of the
+                services
+                <br /> 6. In the event, you are unable to provide the services (i.e. unable to fulfill a service
+                request),
+                you will immediately notify us
+                <br /> 7. Company reserves the right to delist your services from the website and/or suspends/terminate
+                your account at its sole discretion
+                <br /> 8. We may charge you such fees for listing your services, as may be mutually agreed in writing
+                between
+                us, from time to time
+                <br /> 9. You are prohibited from sharing or selling any customer data which may come in your
+                possession
+                during rendering of services. Company reserves the right to take appropriate legal action against you
+                (including
+                your directors/personnel/officers) in case of breach of these terms
+                <br /> 10. Your account shall be valid until it is terminated either by you or by us with the notice
+                period of one month.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">SAVE</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-md-3 slidebar-spilt ">
+      <app-comments [comments]="comments" (saveComment)="saveComment($event) "></app-comments>
+    </div>
+  </div>
+</div>

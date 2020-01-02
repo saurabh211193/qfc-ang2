@@ -1,0 +1,63 @@
+<div>
+  <h5>Customer Details({{data.CustomerId}})</h5>
+</div>
+
+<form class="form" [formGroup]="customerForm" (ngSubmit)="saveCustomerDetail()" *ngIf="data">
+  <div class="row">
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Customer Name</label>
+        <input input type="text" class="form-control" formControlName="CustomerName" required [disableControl]="!edit">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4" *ngIf="callDetails && LeadData">
+      <!-- <ng-container>
+        <app-dialer-call [callDetails]="callDetails" [leadData]="LeadData" (click)="dialerCall(data.CustomerMobileNo,'qfccustomer')"></app-dialer-call>
+      </ng-container> -->
+      <!-- <div class="form-group">
+
+        <input type="text" class="form-control" required disabled>
+        <label class="form-control-placeholder" for="Name">Mobile Number</label>
+        <i class="fa fa-phone dialer" (click)="call()"></i>
+      </div> -->
+
+
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Mobile Number</label>
+        <input input type="text" class="form-control" formControlName="CustomerMobileNo"
+          [value]="customerForm.get('CustomerMobileNo').value | mask" required disabled>
+      </app-qfc-input>
+      <a><i class="fa fa-phone" (click)="dialerCall(data.CustomerMobileNo,'qfccustomer')"
+          *ngIf="LeadData.ProductId != 4"></i></a>
+    </div>
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Email</label>
+        <input input type="text" class="form-control" formControlName="CustomerEmail" required [disableControl]="!edit">
+      </app-qfc-input>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Alternate Number</label>
+        <input input type="text" class="form-control" formControlName="CustomerAlternateMobileNo" required
+          [disableControl]="!edit">
+      </app-qfc-input>
+      <a><i class="fa fa-phone" (click)="dialerCall(data.CustomerAlternateMobileNo,'qfccustomer')"
+          *ngIf="LeadData.ProductId != 4"></i></a>
+    </div>
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Address</label>
+        <input input type="text" class="form-control" formControlName="CustomerAddress" required
+          [disableControl]="true">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-4">
+      <button class="btn btn-primary" *ngIf="!edit" (click)="editForm()">Edit</button>
+      <button class="btn btn-primary save" *ngIf="edit">Save</button>
+      <button class="btn btn-primary cancel" *ngIf="edit" (click)="edit=!edit">Cancel</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,138 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="heading">Garage creation feature</div>
+    </div>
+  </div>
+  <form class="" [formGroup]="garageForm" (ngSubmit)="insertGarageDetails()">
+    <div class="row">
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Garage Name</label>
+          <input input type="text" class="form-control" formControlName="Name" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Garage Type</label>
+          <select input class="form-control" formControlName="GarageType" (change)="getGarageType()">
+            <option value="">Select</option>
+            <option value="Authorized">Authorized</option>
+            <option value="MultiBrand">MultiBrand</option>
+          </select>
+        </app-qfc-input>
+
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Login Mobile No.</label>
+          <input input type="number" class="form-control" formControlName="LoginMobileNo" required>
+        </app-qfc-input>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Address">Address</label>
+          <input input type="text" class="form-control" formControlName="Address" id="garageCreateAddress"
+            (focus)="mapInit()" required>
+          <span error class="error" *ngIf="formErrors.Address">{{formErrors.Address}}</span>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">City</label>
+          <select input class="form-control" formControlName="City">
+            <option value="">Select</option>
+            <option *ngFor="let city of cities" value="{{city.Name}}">{{city.Name}}</option>
+          </select>
+        </app-qfc-input>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Statue">State</label>
+          <input input type="text" class="form-control" formControlName="State" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Pincode</label>
+          <input input type="number" class="form-control" formControlName="Pincode" required>
+        </app-qfc-input>
+      </div>
+
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Garage Status</label>
+          <select input class="form-control" [(ngModel)]="garageType" [ngModelOptions]="{standalone: true}"
+            (change)="getGarageTypeValidation()">
+            <option value="">Select</option>
+            <option value="1">Partner</option>
+            <option value="2">Online Agreed</option>
+            <option value="3">Inactive</option>
+          </select>
+        </app-qfc-input>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Mobile No.</label>
+          <input input type="number" class="form-control" formControlName="ContactPersonMobileNo" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Alternate Mobile No.</label>
+          <input input type="number" class="form-control" formControlName="AlternateNo" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="EmailId">Make</label>
+          <app-multiselect-dropdown input [settings]="multiselect_dropdown" [data]="makes"
+            [selected_data]="selectedMake" (getSelectedItem)="getMakeItems($event)">
+          </app-multiselect-dropdown>
+          <!-- <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span> -->
+        </app-qfc-input>
+        <!-- <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Make</label>
+          <input input type="text" class="form-control" formControlName="createdonstart" required>
+        </app-qfc-input> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="EmailId">Insurer Cashless tie-ups</label>
+          <app-multiselect-dropdown input [settings]="multiselect_dropdown_insurer" [data]="insurerMaster"
+            [selected_data]="selectedInsurer" (getSelectedItem)="getInsurerItems($event)">
+          </app-multiselect-dropdown>
+          <!-- <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span> -->
+        </app-qfc-input>
+      </div>
+      <div class="row-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Franchise">Franchise</label>
+          <select class="form-control" input required [(ngModel)]="franchiseObj" [ngModelOptions]="{standalone: true}">
+            <option value="">Select</option>
+            <option *ngFor='let franchise of franchiseMaster' [value]="franchise.FranchiseName">
+              {{franchise.FranchiseName}}
+            </option>
+          </select>
+        </app-qfc-input>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="!this.garageForm.valid">Save</button>
+      </div>
+
+    </div>
+  </form>
+</div>

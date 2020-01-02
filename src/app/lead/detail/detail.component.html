@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-9">
+      <div class="section-A" *ngIf="customerDetail && leadDetail">
+        <app-customer-detail [data]="customerDetail" [LeadData]="leadDetail">
+        </app-customer-detail>
+      </div>
+      <div class="section-A" *ngIf="leadDetail && AllMake && statusDetail">
+        <app-lead-detail [data]="leadDetail" [AllMake]="AllMake" [statusDetail]="statusDetail"
+          [customerData]="customerDetail" [isClaimLead]="IsClaimLead"></app-lead-detail>
+        <!-- ></app-lead-detail> -->
+      </div>
+      <div class="section-A"
+        *ngIf="bookingDetail?.BookingDetailId && bookedGarageDetail && leadDetail && statusDetail && customerDetail">
+        <app-booking-detail [data]="bookingDetail" [garage]="bookedGarageDetail" [lead]="leadDetail"
+          [status]="statusDetail" [customer]="customerDetail" (initializeLead)="getLeadDetail($event)">
+        </app-booking-detail>
+      </div>
+      <div class="section-A" *ngIf="leadDetail" [hidden]="true">
+        <app-cross-sale [lead]="leadDetail" [customer]="customerDetail" (initializeLead)="getLeadDetail($event)">
+        </app-cross-sale>
+      </div>
+      <div class="section-B" *ngIf="leadDetail && customerDetail">
+        <app-selection-detail [leadDetail]="leadDetail" [customer]="customerDetail" [booking]="bookingDetail"
+          (initializeLead)="getLeadDetail($event)" [isClaimLead]="IsClaimLead"></app-selection-detail>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="status-log">
+        <div class="form-group">
+          <label class="heading_status" for="name">Status</label>
+          <select class="form-control" (change)="changeSubStatus($event.target.value)" [(ngModel)]="StatusId">
+            <option value="0">Select</option>
+            <option *ngFor="let status of statusMaster" value="{{status.StatusId}}">{{status.StatusName}}</option>
+          </select>
+          <select class="form-control" [(ngModel)]="SubStatusId">
+            <option value="0">Select</option>
+            <option *ngFor="let substatus of subStatusMaster" value="{{substatus.SubStatusId}}">
+              {{substatus.SubStatusName}}</option>
+          </select>
+          <button class="btn btn-primary" (click)="setStatus()">Update Status</button>
+        </div>
+      </div>
+
+      <div class="status-log">
+        <div class="form-group">
+          <label class="heading_status" for="name">Callback</label>
+          <select class="form-control" [(ngModel)]="followUp.with">
+            <option value="">Select</option>
+            <option *ngFor="let followUpWith of followUpWithList" value="{{followUpWith}}">{{followUpWith}}</option>
+          </select>
+
+          <div class="form-group">
+            <div class="input-group">
+              <input class="form-control" placeholder="Date" name="d2" #c2="ngModel" [(ngModel)]="followUp.date"
+                ngbDatepicker #d2="ngbDatepicker" (click)="d2.toggle()">
+            </div>
+            <div class="input-group">
+              <ngb-timepicker [(ngModel)]="followUp.time"></ngb-timepicker>
+            </div>
+          </div>
+          <button class="btn btn-primary" (click)="setLeadFollowup()">Set Callback</button>
+        </div>
+      </div>
+
+
+      <div class="status-log">
+
+        <div class="form-group">
+          <label class="heading_status" for="name">Communication</label>
+          <select class="form-control" [(ngModel)]="commId">
+            <option value="0">Select</option>
+            <option *ngFor="let comm of communications" value="{{comm.MessageId}}">{{comm.Name}}</option>
+          </select>
+
+          <button class="btn btn-primary" (click)="sendSMSCustomer()">Send SMS</button>
+        </div>
+      </div>
+      <app-comments [comments]="comments" (saveComment)="saveComment($event)"></app-comments>
+    </div>
+  </div>
+</div>

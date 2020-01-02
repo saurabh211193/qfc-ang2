@@ -1,0 +1,35 @@
+<div class="container-fluid pop_window">
+  <div>
+    <div class="row popup-heading">
+      <div class="col-md-9">
+        <h5>Pickup contact</h5>
+      </div>
+      <div class="col-md-3">
+        <button (click)="close()"><span>X</span></button>
+      </div>
+    </div>
+    <form class="form" [formGroup]="pickupForm" *ngIf="data && pickupDetail" (ngSubmit)="savePickupDetail()">
+      <div class="row popup-heading">
+        <div class="col-md-6">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="Name">Contact Person Name</label>
+            <input input type="text" class="form-control" formControlName="ContactPersonName" required>
+          </app-qfc-input>
+        </div>
+        <div class="col-md-6">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="Name">Contact Person Mobile Number</label>
+            <input input type="text" class="form-control" formControlName="ContactPersonMobileNo" required>
+          </app-qfc-input>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <!-- <button class="btn btn-primary">Edit</button> -->
+          <button type="submit" class="btn btn-primary">Save</button>
+          <!-- <button class="btn btn-primary" *ngIf="edit" (click)="edit=!edit">Cancel</button> -->
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

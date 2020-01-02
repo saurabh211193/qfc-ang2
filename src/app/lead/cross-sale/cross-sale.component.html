@@ -1,0 +1,38 @@
+<div class="row heading">
+  <div class="col-md-12">
+    <h5>Cross Sale</h5>
+  </div>
+</div>
+
+<form class="form" [formGroup]="crossSaleForm" (ngSubmit)="createCrossSaleLead()">
+  <div class="row">
+    <div class="col-md-4">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Products</label>
+        <select input class="form-control" formControlName="ProductId"
+          (change)="changeSuppliers($event.target.value);changeProducts($event.target.value);">
+          <option value="">Select</option>
+          <option *ngFor="let product of products" [value]="product.ProductId">{{product.ProductName}}</option>
+        </select>
+
+      </app-qfc-input>
+    </div>
+
+    <div class="col-md-4" *ngIf="this.crossSaleForm.get('ProductId').value">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Suppliers</label>
+        <select input class="form-control" formControlName="SelectionId">
+          <option value="">Select</option>
+          <option *ngFor="let supplier of suppliers" [value]="supplier.SupplierId">{{supplier.Name}}</option>
+        </select>
+
+      </app-qfc-input>
+    </div>
+
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-primary save">Save</button>
+    </div>
+  </div>
+
+</form>
+<!-- [attr.disabled]="crossSaleForm.valid" -->

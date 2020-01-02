@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <h4 class="frm-hd">Heading section</h4>
+    </div>
+  </div> -->
+  <div class="row strip-panel">
+    <div class="col-lg-2 col-xs-6 small_block_agent" *ngFor="let status of statusCount;let i=index;">
+      <div class="small-box bg strip{{i}}" (click)="changeStatus(status.StatusId,status.StatusMode)">
+        <div class="inner">
+          <h3>{{status.Total}}</h3>
+          <p>{{status.StatusName}}</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-document-text"></i>
+        </div>
+        <a class="small-box-footer" href="javascript:void(0);">More info <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
+  <form class="" [formGroup]="filterForm" (ngSubmit)="searchFilter()" *ngIf="filterForm">
+    <div class="row">
+      <div class="col-md-1">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Id</label>
+          <input input type="number" class="form-control" formControlName="leadid" [value]="" min="1">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Mobile No.</label>
+          <input input type="text" class="form-control" formControlName="mobileno" maxlength="10">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Source</label>
+          <select input class="form-control" formControlName="leadsource">
+            <option value="">Both</option>
+            <option *ngFor="let type of leadType" value="{{type}}">{{type}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Products</label>
+          <select input class="form-control" formControlName="productid" (change)="changeProduct()">
+            <option value="">Select</option>
+            <option *ngFor=" let product of products" value="{{product.ProductId}}">{{product.ProductName}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+
+
+    </div>
+  </form>
+
+  <!-- <div class="pbrefUpload"><a href="http://pbutility.policybazaar.com/">PBRefLeads</a></div> -->
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>
+          Id
+        </th>
+        <th>
+          MobileNo
+        </th>
+        <th>
+          Car
+        </th>
+        <th>
+          Location
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          Source
+        </th>
+        <th>
+          Utm Source
+        </th>
+        <th>
+          Product
+        </th>
+        <th>
+          FollowUp
+        </th>
+        <th>
+          Date
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leads">
+        <!-- <td routerLink="../../detail/{{lead.LeadId}}">{{lead.LeadId}}</td> -->
+        <td (click)="getLeadDetail(lead.LeadId)">{{lead.LeadId}}</td>
+        <td>{{lead.MobileNo | mask}}</td>
+        <td>{{lead.MakeName +'-'+ lead.ModelName}}</td>
+        <td>{{lead.Location}}</td>
+        <td>{{lead.StatusName + '(' + lead.SubStatusName + ')'}}</td>
+        <td>{{lead.LeadSource}}</td>
+        <td>{{lead.Utm_Source}}</td>
+        <td>{{lead.ProductName}}</td>
+        <td>{{lead.FollowUpDateTime}}</td>
+        <td>{{lead.CreatedOn | date: "dd/MM/yyyy h:mm a"}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <app-pagination *ngIf="pagination.totalPages>1" [pagination]="pagination" (PageChange)="PageChanged($event)">
+  </app-pagination>
+</div>

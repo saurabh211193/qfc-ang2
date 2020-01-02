@@ -1,0 +1,27 @@
+<nav class="navbar navbar-default nav-garage">
+  <div class="navbar-header">
+    <div class="navbar-left logo">
+      <img class="img-responsive" src="assets/images/qfc-png.png">
+    </div>
+    <div class="navbar-right">
+      <!-- <div class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0);">
+          <i class="material-icons">person</i>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0);">Logout</a></li>
+        </ul>
+      </div> -->
+      <div ngbDropdown class="d-inline-block" *ngIf="userDetails.UserId">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{userDetails.Name +
+          '(' + userDetails.EmployeeId + ')' }}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <!-- <button ngbDropdownItem class="dropdown-item" (click)="openRoleModal()">Change Product</button> -->
+          <button ngbDropdownItem class="dropdown-item" (click)="logout()">Logout</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</nav>

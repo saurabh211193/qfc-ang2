@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <form class="" [formGroup]="reportForm" (ngSubmit)="getReportData()">
+    <div class="row">
+      <div class="col-md-3">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Status</label>
+          <select input class="form-control" formControlName="statusid">
+            <option value="">Select</option>
+            <option *ngFor="let status of statusMaster" value="{{status.StatusId}}">{{status.StatusName}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-3">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Lead Creation From</label>
+          <input input type="date" class="form-control" formControlName="createdonstart" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-3">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Lead Creation To</label>
+          <input input type="date" class="form-control" formControlName="createdonend" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary" [disabled]="!this.reportForm.valid">Download</button>
+      </div>
+    </div>
+  </form>
+</div>

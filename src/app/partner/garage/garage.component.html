@@ -1,0 +1,435 @@
+<app-qfc-header></app-qfc-header>
+<div class="main-side">
+  <div class="container-fluid detail-page">
+    <div class="row">
+      <div class="col-md-0 col-sm-12 split-section">
+        <form class="form" [formGroup]="garageForm" (ngSubmit)="saveGarageDetail()" *ngIf="garageDetail">
+          <div class="row">
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="Name">Garage Name</label>
+                <input input type="text" class="form-control" formControlName="Name" required>
+                <span error class="error" *ngIf="formErrors.Name">{{formErrors.Name}}</span>
+              </app-qfc-input>
+            </div>
+
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="Locality">Locality</label>
+                <input input type="text" class="form-control" formControlName="Locality" required>
+                <span error class="error" *ngIf="formErrors.Locality">{{formErrors.Locality}}</span>
+              </app-qfc-input>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="Address">Address</label>
+                <input input type="text" class="form-control" formControlName="Address" id="garageAddress"
+                  (focus)="mapInit()" required>
+                <span error class="error" *ngIf="formErrors.Address">{{formErrors.Address}}</span>
+              </app-qfc-input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="State">State</label>
+                <input input type="text" class="form-control" formControlName="State" required>
+                <span error class="error" *ngIf="formErrors.State">{{formErrors.State}}</span>
+              </app-qfc-input>
+            </div>
+
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="City">City</label>
+                <input input type="text" class="form-control" formControlName="City" required>
+                <span error class="error" *ngIf="formErrors.City">{{formErrors.City}}</span>
+              </app-qfc-input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="Pincode">Pincode</label>
+                <input input type="text" class="form-control" formControlName="Pincode" required>
+                <span error class="error" *ngIf="formErrors.Pincode">{{formErrors.Pincode}}</span>
+              </app-qfc-input>
+            </div>
+
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="LandLineNo">LandLineNo</label>
+                <input input type="text" class="form-control" formControlName="LandLineNo" required>
+                <span error class="error" *ngIf="formErrors.LandLineNo">{{formErrors.LandLineNo}}</span>
+              </app-qfc-input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="ContactPersonName">ContactPersonName</label>
+                <input input type="text" class="form-control" formControlName="ContactPersonName" required>
+                <span error class="error" *ngIf="formErrors.ContactPersonName">{{formErrors.ContactPersonName}}</span>
+              </app-qfc-input>
+            </div>
+
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="ContactPersonMobileNo">ContactPersonMobileNo</label>
+                <input input type="text" class="form-control" formControlName="ContactPersonMobileNo" required>
+                <span error class="error"
+                  *ngIf="formErrors.ContactPersonMobileNo">{{formErrors.ContactPersonMobileNo}}</span>
+              </app-qfc-input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder"
+                  for="AlternateContactPersonName">AlternateContactPersonName</label>
+                <input input type="text" class="form-control" formControlName="AlternateContactPersonName">
+                <!-- <span error class="error" *ngIf="formErrors.AlternateContactPersonName">{{formErrors.AlternateContactPersonName}}</span> -->
+              </app-qfc-input>
+            </div>
+
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="AlternateNo">AlternateNo</label>
+                <input input type="number" class="form-control" formControlName="AlternateNo">
+                <!-- <span error class="error" *ngIf="formErrors.AlternateNo">{{formErrors.AlternateNo}}</span> -->
+              </app-qfc-input>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="EmailId">EmailId</label>
+                <input input type="text" class="form-control" formControlName="EmailId" required>
+                <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span>
+              </app-qfc-input>
+            </div>
+            <div class="col-md-6">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="EmailId">Make</label>
+                <app-multiselect-dropdown input [settings]="multiselect_dropdown" [data]="makes"
+                  [selected_data]="selectedMake" (getSelectedItem)="getItems($event)">
+                </app-multiselect-dropdown>
+                <span error class="error" *ngIf="formErrors.EmailId">{{formErrors.EmailId}}</span>
+              </app-qfc-input>
+            </div>
+          </div>
+
+          <div class="row pick-drop">
+            <label class="col-md-3 bolder" for="EmailId">Pick Drop</label>
+            <div class="radio col-md-6">
+              <label><input type="radio" value="Yes" formControlName="PickDrop" id="Yes">Yes</label>
+              <label><input type="radio" value="No" formControlName="PickDrop" id="No">No</label>
+            </div>
+
+          </div>
+
+          <div class="row time-drop" *ngIf="garageForm.value.PickDrop === 'Yes'">
+            <label class="col-md-3 bolder">Pick Drop Timing</label>
+            <div class="col-md-6">
+              <span *ngFor="let time of pickDropTime">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input"
+                    [checked]="pickDropTimings.indexOf(time) != -1 ? true : false" [value]="time"
+                    (click)="changePickDropTiming($event.target.value)">{{time}}
+                </label>
+              </span>
+            </div>
+
+          </div>
+
+          <div class="row day-off">
+            <div class="col-md-3 bolder">
+              Days Off
+            </div>
+            <div class="col-md-9">
+              <div class="radio" input>
+                <label *ngFor="let day of days"><input type="radio" value="{{day}}" formControlName="DaysOff"
+                    id="{{day}}">{{day}}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row services">
+            <div class="col-md-3 bolder">
+              Services
+            </div>
+            <div class="col-md-9">
+              <div *ngFor="let service of services" class="details_service">
+                <!-- <span *ngIf="service.ServiceTypeId != '4'">
+                  <app-qfc-input>
+                    <input input type="checkbox" (click)="addServices(service.services)" [checked]="service.ServiceTypeId==checked[service.ServiceTypeName]Service ? true : false ">
+                  </app-qfc-input>
+                  <label>{{service.ServiceTypeName}}</label>
+                  <ul>
+                    <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                  </ul>
+                </span> -->
+                <span *ngIf="service.ServiceTypeId == '1'">
+                  <app-qfc-input>
+                    <input input type="checkbox" (click)="addServices(service.services)"
+                      [checked]="checkedBasicService == '1' ? true : false ">
+                  </app-qfc-input>
+                  <label>{{service.ServiceTypeName}}</label>
+                  <ul>
+                    <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                  </ul>
+                </span>
+                <span *ngIf="service.ServiceTypeId == '2'">
+                  <app-qfc-input>
+                    <input input type="checkbox" (click)="addServices(service.services)"
+                      [checked]="checkedStandardService == '2' ? true : false ">
+                  </app-qfc-input>
+                  <label>{{service.ServiceTypeName}}</label>
+                  <ul>
+                    <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                  </ul>
+                </span>
+                <span *ngIf="service.ServiceTypeId == '3'">
+                  <app-qfc-input>
+                    <input input type="checkbox" (click)="addServices(service.services)"
+                      [checked]="checkedPremiumService == '3' ? true : false ">
+                  </app-qfc-input>
+                  <label>{{service.ServiceTypeName}}</label>
+                  <ul>
+                    <li *ngFor="let s of service.services ">{{s.ServiceName}}</li>
+                  </ul>
+                </span>
+                <span *ngIf="service.ServiceTypeId =='4' ">AddOn Services
+                  <div *ngFor="let item of service.services ">
+                    <app-qfc-input>
+                      <input input type="checkbox" (click)="addOtherServices(item.ServiceId) "
+                        [checked]="checkedAddonService.indexOf(item.ServiceId) == -1 ? false : true ">
+                    </app-qfc-input>
+                    <label>{{item.ServiceName}}</label>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="category_list">
+            <div class="heading">
+              <h4>USP</h4>
+              <!-- <span><button type="button" class="btn btn-primary btn-sm" (click)="addEditUsp()" *ngIf="editUsp">View</button></span>
+              <span><button type="button" class="btn btn-primary btn-sm" (click)="addEditUsp()" *ngIf="!editUsp">Add</button></span> -->
+            </div>
+            <div class="row" *ngIf="editUsp">
+              <div class="col-md-4">
+                <app-qfc-input>
+                  <label label class="form-control-placeholder" for="name">Category</label>
+                  <select input class="form-control" [(ngModel)]="category" [ngModelOptions]="{standalone: true}"
+                    (change)="updateUspMaster($event)">
+                    <option value="">Select</option>
+                    <option *ngFor="let usp of uspTypeMaster" value="{{usp.UspTypeName}}">{{usp.UspTypeName}}</option>
+                  </select>
+                </app-qfc-input>
+              </div>
+              <div class="col-md-8" *ngIf="uspMaster && uspMaster.length">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Sub Category</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let usp of uspMaster;let idx = index;">
+                      <td>
+                        <div class="checkbox">
+                          <span>{{usp.Name}}</span>
+                          <!-- <label><input type="checkbox" ([ngModel])="USPIsActive[idx]" (change)="triggerSomeEvent(idx,$event.target)">{{usp.Name}}</label> -->
+                        </div>
+                      </td>
+                      <td>
+                        <select input class="form-control" [(ngModel)]="discountType[idx]"
+                          [ngModelOptions]="{standalone: true}">
+                          <option value="">Select</option>
+                          <option value="p">%</option>
+                          <option value="r">Rs</option>
+                        </select>
+                      </td>
+                      <td>
+                        <!-- <app-qfc-input>
+                          <input input type="number" class="form-control" *ngIf="discountType[idx]" [(ngModel)]="discount[idx]"
+                            [ngModelOptions]="{standalone: true}">{{discountType[idx]}}
+                        </app-qfc-input>
+                        <button type="button" class="btn btn-primary btn-sm" *ngIf="discountType[idx]" (click)="insertGarageUsp(idx,usp)">Add</button> -->
+                        <div class="discount_td" *ngIf="discountType[idx] == 'p'">
+                          <app-qfc-input>
+                            <input input type="number" max="100" class="form-control" *ngIf="discountType[idx]"
+                              [(ngModel)]="discount[idx]" [ngModelOptions]="{standalone: true}"
+                              maxlength="100">{{discountType[idx]}}
+                          </app-qfc-input>
+                        </div>
+                        <div class="discount_td" *ngIf="discountType[idx] == 'r'">
+                          <app-qfc-input>
+                            <input input type="number" class="form-control" *ngIf="discountType[idx]"
+                              [(ngModel)]="discount[idx]" [ngModelOptions]="{standalone: true}">{{discountType[idx]}}
+                          </app-qfc-input>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-sm" *ngIf="discountType[idx]"
+                          (click)="insertGarageUsp(idx,usp)">Add</button>
+                      </td>
+
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- <div class="col-md-3">
+              <button class="btn btn-primary" style="margin:20px;">Add</button>
+            </div> -->
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Discount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let garageusp of garageUsp">
+                      <th>{{garageusp.Name}}</th>
+                      <td>
+
+                        <ng-container *ngIf="garageusp.DiscountType == 'p'">{{garageusp.Discount}}%</ng-container>
+                        <ng-container *ngIf="garageusp.DiscountType == 'r'">Rs.{{garageusp.Discount}}</ng-container>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-md-2">
+              <app-qfc-input>
+                <label label class="form-control-placeholder" for="name">Category</label>
+                <select input class="form-control" [(ngModel)]="category" [ngModelOptions]="{standalone: true}"
+                  (change)="updateUspMaster($event)">
+                  <option value="">Select</option>
+                  <option *ngFor="let usp of uspTypeMaster" value="{{usp.UspTypeName}}">{{usp.UspTypeName}}</option>
+                </select>
+              </app-qfc-input>
+            </div>
+            <div class="col-md-4">
+              <ng-container *ngFor="let usp of uspMaster">
+                <label></label>
+                <input type="checkbox">
+                <span>{{usp.Name}}</span>
+                <input type="number">
+                <span>%</span>
+              </ng-container>
+            </div>
+          </div> -->
+
+          <div class="row button_ctrl">
+            <div class="col-md-3 bolder">
+              Send Confirmation
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-sm" (click)="sendOtp()">SEND CONFIRMATION CODE
+              </button>
+            </div>
+
+          </div>
+
+          <div class="row button_ctrl">
+            <div class="col-md-3 bolder">
+              Verify Code
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                <input type="number" class="form-control" [(ngModel)]="sentOtp" [ngModelOptions]="{standalone: true}">
+              </div>
+
+            </div>
+            <div class="col-md-3">
+              <button type="button" class="btn btn-primary btn-sm" (click)="verifyOtp()" [disabled]="!sentOtp">
+                VERIFY CODE
+              </button>
+            </div>
+          </div>
+
+
+
+
+          <div class="row term_row">
+
+            <div class="col-md-12 Iagree" for="isAgreed">
+              <input type="checkbox" id="isAgreed" name="isAgreed"
+                style="margin: 0px 10px 0 0; position: relative; top: -2px;" [(ngModel)]="termsNCondition"
+                [ngModelOptions]="{standalone: true}">
+
+              <label for="termsandconditions" class="bmd-label-floating">Please read and agree to the terms and
+                conditions
+                to proceed</label>
+
+              <div class="term_condition">
+                <p>
+                  1. Your account will be govern by these empanelment terms and conditions. You shall read the complete
+                  <a style="cursor: pointer;color: blue;" (click)="open()"  >
+                  Terms &
+                  Conditions</a> as the same form a binding contract between
+                  us and you.
+
+                  <br /> 2. You shall be solely responsible to the customers/users of the Platform for the services
+                  rendered
+                  by you
+                  <br /> 3. You have the necessary skill, expertise and personnel to provide the service. You shall
+                  render
+                  the services, at all times in accordance with applicable laws
+                  <br /> 4. You have the necessary permissions and licenses to provide the services
+                  <br /> 5. You shall appoint a SPOC who will be responsible for coordinating with us in respect of the
+                  services
+                  <br /> 6. In the event, you are unable to provide the services (i.e. unable to fulfill a service
+                  request),
+                  you will immediately notify us
+                  <br /> 7. Company reserves the right to delist your services from the website and/or
+                  suspends/terminate
+                  your account at its sole discretion
+                  <br /> 8. We may charge you such fees for listing your services, as may be mutually agreed in writing
+                  between
+                  us, from time to time
+                  <br /> 9. You are prohibited from sharing or selling any customer data which may come in your
+                  possession
+                  during rendering of services. Company reserves the right to take appropriate legal action against you
+                  (including
+                  your directors/personnel/officers) in case of breach of these terms
+                  <br /> 10. Your account shall be valid until it is terminated either by you or by us with the notice
+                  period of one month.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <button type="submit" class="btn btn-primary"
+                [disabled]="!confirmedOtp || !termsNCondition">SUBMIT</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

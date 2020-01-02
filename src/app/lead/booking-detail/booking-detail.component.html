@@ -1,0 +1,79 @@
+<div class="row heading">
+  <div class="col-md-5">
+    <h5>Booking Details</h5>
+  </div>
+  <div class="col-md-7" *ngIf="data.IsPickupRequied !== 0">
+    <button class="btn btn-primary" (click)="openPickupModal()">Pickup Contact</button>
+  </div>
+</div>
+
+<form class="form" [formGroup]="bookingForm" (ngSubmit)="saveBookingData()" *ngIf="data">
+  <div class="row">
+    <div class="col-md-6">
+
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">PickUp Date</label>
+        <input input type="date" class="form-control" formControlName="BookingPickupDate" required
+          [disableControl]="!edit">
+      </app-qfc-input>
+
+    </div>
+    <div class="col-md-6">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">PickUp Time</label>
+        <select input class="form-control" formControlName="BookingPickupTime" [disableControl]="!edit">
+          <option value="">Select</option>
+          <option *ngFor="let timings of pickdroptimings" [selected]="data.BookingPickupTime === timings">{{timings}}
+          </option>
+        </select>
+
+      </app-qfc-input>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="status.StatusId === 5 || status.StatusId === 7">
+    <div class="col-md-6">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="ServiceDate">Serviced Date</label>
+        <input input type="date" class="form-control" formControlName="ServiceDate" required [disableControl]="!edit">
+      </app-qfc-input>
+    </div>
+    <div class="col-md-6">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="ServiceAmount">Service Amount</label>
+        <input input type="text" class="form-control" formControlName="TotalCost" required [disableControl]="!edit">
+      </app-qfc-input>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="Name">Address</label>
+        <input input type="text" class="form-control" formControlName="Address" required disabled>
+      </app-qfc-input>
+    </div>
+
+    <div class="col-md-6">
+      <app-qfc-input>
+        <label label class="form-control-placeholder">Pickup Required</label>
+        <select input class="form-control" formControlName="IsPickupRequied" [disableControl]="!edit">
+          <option value="">Select</option>
+          <option *ngFor="let option of isPickupReq" [selected]="option.id === data.IsPickupRequied"
+            value="{{option.id}}">{{option.value}}
+          </option>
+        </select>
+      </app-qfc-input>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <button class="btn btn-primary" *ngIf="!edit" (click)="edit=!edit">Edit</button>
+      <button type="submit" class="btn btn-primary save" *ngIf="edit">Save</button>
+      <button class="btn btn-primary cancel" *ngIf="edit" (click)="edit=!edit">Cancel</button>
+    </div>
+  </div>
+</form>

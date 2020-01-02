@@ -1,0 +1,165 @@
+<div class="section-inner" *ngIf="leadDetail.ProductId != 4">
+  <!-- <div class="section-inner" *ngIf=""> -->
+  <div class="row">
+    <div class="col-md-9">
+      <h5>Services Selected</h5>
+    </div>
+  </div>
+  <div class="row">
+    <ul>
+      <li *ngFor="let serviceType of services ">
+        <span>{{serviceType.ServiceTypeName}}</span>
+        <ul class="sub_ul">
+          <li *ngFor="let service of serviceType.services">
+            <span>
+              {{service.ServiceName}}
+            </span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <!-- <ul>
+      <li *ngFor="let service of services">{{service.ServiceName}}</li>
+    </ul> -->
+  </div>
+</div>
+<div class="section-inner">
+  <div class="row heading">
+    <div class="col-md-9">
+      <h5>Garage Selected<span *ngIf="garageDetail?.GarageId" class="anchor-link"
+          (click)="getGarageDetail(garageDetail.GarageId)">({{garageDetail?.GarageId}})</span></h5>
+    </div>
+    <div class="col-md-3" (click)="openGarageListModal()">Garage list</div>
+  </div>
+
+  <form class="form" [formGroup]="garageForm" *ngIf="garageForm">
+    <div class="row">
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Garage Name</label>
+          <input input type="text" class="form-control" formControlName="GarageName" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Contact Person Name</label>
+          <input input type="text" class="form-control" formControlName="GarageContactPersonName" required>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Contact Person Mobile Number</label>
+          <input input type="text" class="form-control" formControlName="GarageContactPersonMobileNo"
+            [value]="garageForm.get('GarageContactPersonMobileNo').value | mask" required>
+        </app-qfc-input>
+        <a><i class="fa fa-phone" (click)="dialerCall(garageDetail.GarageContactPersonMobileNo,'qfcgarage')"
+            *ngIf="leadDetail.ProductId != 4"></i></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Address</label>
+          <input input type="text" class="form-control" formControlName="GarageAddress" required>
+        </app-qfc-input>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Alternate Number</label>
+          <input input type="text" class="form-control" formControlName="GarageAlternateNo"
+            [value]="garageForm.get('GarageAlternateNo').value | mask" required>
+        </app-qfc-input>
+        <a><i class="fa fa-phone" (click)="dialerCall(garageDetail.GarageAlternateNo,'qfcgarage')"
+            *ngIf="leadDetail.ProductId != 4"></i></a>
+      </div>
+
+      <div class="col-md-4">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="Name">Email</label>
+          <input input type="text" class="form-control" formControlName="GarageEmail" required>
+        </app-qfc-input>
+      </div>
+
+      <div class="col-md-1">
+        <button class="btn btn-primary" (click)="openBookingDetailModal()">
+          Book
+        </button>
+      </div>
+
+      <!-- <div class="col-md-3" class="sms-link" (click)="sendGarageAddress()"
+        style="color: #40aff8; font-size:13px;padding: 8px;">Send
+        Address to
+        Customer</div> -->
+    </div>
+  </form>
+
+
+
+
+  <div class="row service-advisor" *ngIf="bookingDetail.SelectionId">
+
+
+    <div class="col-md-4">
+      <div class="col-a75">
+        <app-qfc-input>
+          <label label class="form-control-placeholder">Service Advisor <a><i class="fa fa-phone"
+                (click)="callGarageUser(selectionServiceAdvisor)"></i></a></label>
+          <select input class="form-control" [(ngModel)]="selectionServiceAdvisor">
+            <option value="">Select</option>
+            <option [ngValue]="user" *ngFor="let user of serviceAdvisor">{{user.Name}}
+            </option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-a25">
+
+        <button type="button" class="btn btn-primary"
+          (click)="saveGarageUserDetail(selectionServiceAdvisor)">Save</button>
+      </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="col-a75">
+        <app-qfc-input>
+          <label label class="form-control-placeholder">Pickup guy <a><i class="fa fa-phone"
+                (click)="callGarageUser(selectionServiceAdvisor)"></i></a></label>
+          <select input class="form-control" [(ngModel)]="selectionPickupguy">
+            <option value="">Select</option>
+            <option [ngValue]="user" *ngFor="let user of pickupguy">{{user.Name}}
+            </option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-a25">
+
+        <button type="button" class="btn btn-primary" (click)="saveGarageUserDetail(selectionPickupguy)">Save</button>
+      </div>
+
+    </div>
+
+
+    <div class="col-md-4">
+      <div class="col-a75">
+        <app-qfc-input>
+          <label label class="form-control-placeholder">Garage Acceptance status</label>
+          <select input class="form-control" [(ngModel)]="garageSelectionStatus">
+            <option value="">Select</option>
+            <option [value]="status.StatusId" *ngFor="let status of garageSelectionStatusMaster"
+              [selected]="status.StatusId == bookingDetail.SelectionStatusId">{{status.STatusName}}
+            </option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-a25">
+        <button type="button" class="btn btn-primary" (click)="confirmGarageBookingStatus()">Save</button>
+      </div>
+    </div>
+
+
+  </div>
+</div>

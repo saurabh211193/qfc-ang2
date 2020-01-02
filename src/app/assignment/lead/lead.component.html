@@ -1,0 +1,146 @@
+<div class="container-fluid">
+
+  <form class="" [formGroup]="filterForm" (ngSubmit)="getUnassignedLeads()">
+    <div class="row">
+      <div class="col-md-3">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Assignment Status</label>
+          <select input class="form-control" formControlName="isassigned">
+            <option value="">Select</option>
+            <option *ngFor="let status of leadAssign" value="{{status.id}}">{{status.name}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+
+      <div class="col-md-3">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Product</label>
+          <!-- <select input class="form-control" [(ngModel)]="selectedAgent"> -->
+          <select input class="form-control" formControlName="productid" (change)="updateAgentnLeads()">
+            <option value="">--Select--</option>
+            <!-- <option *ngFor="let agent of agents" value="{{agent.UserId}}">{{agent.Name + '(' + agent.LoginId + ')'}}</option> -->
+            <option *ngFor=" let product of products" value="{{product.ProductId}}">{{product.ProductName}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <br>
+
+  <div class="row">
+
+
+
+
+    <div class="col-md-3">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="name">Agents</label>
+        <!-- <select input class="form-control" [(ngModel)]="selectedAgent"> -->
+        <select input class="form-control" (change)="updateAgent($event)">
+          <option value="">--Select--</option>
+          <!-- <option *ngFor="let agent of agents" value="{{agent.UserId}}">{{agent.Name + '(' + agent.LoginId + ')'}}</option> -->
+          <option *ngFor="let agent of agents" [value]="agent.UserId">{{agent.Name + '(' + agent.LoginId + ')'}}
+          </option>
+        </select>
+      </app-qfc-input>
+    </div>
+
+
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary" (click)="assignLeads()">Assign</button>
+    </div>
+  </div>
+  <!-- <form class="" [formGroup]="filterForm" (ngSubmit)="getUnassignedLeads()">
+    <div class="row">
+      <div class="col-md-1">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Id</label>
+          <input input type="number" class="form-control" formControlName="leadid" [value]="" min="1">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Mobile No.</label>
+          <input input type="text" class="form-control" formControlName="mobileno">
+        </app-qfc-input>
+      </div>
+      <div class="col-md-2">
+        <app-qfc-input>
+          <label label class="form-control-placeholder" for="name">Source</label>
+          <select input class="form-control" formControlName="leadsource">
+            <option value="">Both</option>
+            <option *ngFor="let type of leadType" value="{{type}}">{{type}}</option>
+          </select>
+        </app-qfc-input>
+      </div>
+      <div class="col-md-1">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form> -->
+
+  <table class="table table-bordered assignment-table">
+    <thead>
+      <tr>
+        <th>
+          Select
+        </th>
+        <th>
+          LeadId
+        </th>
+        <th>
+          MobileNo
+        </th>
+        <th>
+          Car
+        </th>
+        <th>
+          Location
+        </th>
+        <th>
+          Status
+        </th>
+        <th>
+          Source
+        </th>
+        <th>
+          Product
+        </th>
+        <th>
+          Date
+        </th>
+        <th>
+          Assigned To
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let lead of leads">
+        <td>
+          <app-qfc-input>
+            <input input type="checkbox" class="form-control" (click)="addLeadId(lead.LeadId)">
+          </app-qfc-input>
+        </td>
+        <td>{{lead.LeadId}}</td>
+        <td>{{lead.MobileNo}}</td>
+        <td>{{lead.MakeName +'-'+ lead.ModelName}}</td>
+        <td>{{lead.Location}}</td>
+        <td>{{lead.StatusName}}</td>
+        <td>{{lead.LeadSource}}</td>
+        <td>{{lead.ProductName}}</td>
+        <td>{{lead.CreatedOn | date: "dd/MM/yyyy h:mm a"}}</td>
+        <td>
+          <ng-container *ngIf="lead.EmployeeId">{{lead.Name + '(' +lead.EmployeeId + ')'}}</ng-container>
+          <ng-container *ngIf="!lead.EmployeeId"></ng-container>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <app-pagination *ngIf="pagination.totalPages>1" [pagination]="pagination" (PageChange)="PageChanged($event)"></app-pagination> -->
+</div>

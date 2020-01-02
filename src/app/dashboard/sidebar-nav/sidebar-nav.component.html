@@ -1,0 +1,33 @@
+<div class="sidebar main_sidebar">
+  <div class="sidebar-wrapper">
+    <ul class="nav">
+      <li class="nav-item" *ngFor="let options of dashboardOptions">
+        <a *ngIf="options.allowAccess || options.access == 2" class="nav-link" routerLink="{{options.route}}"
+          routerLinkActive="active">
+          <i class="fa fa-{{options.image}}" aria-hidden="true"></i>
+          <p>{{options.name}}</p>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" (click)="pbreflink()">
+          <i class="fa fa-external-link-square" aria-hidden="true"></i>
+          <p>PBRef</p>
+        </a>
+      </li>
+
+      <!-- <li class="nav-item"><a class="nav-link">
+          <i class="fa fa-book" aria-hidden="true"></i>
+          <p>My Leads</p>
+        </a></li>
+      <li class="nav-item"><a class="nav-link">
+          <i class="fa fa-user" aria-hidden="true"></i>
+          <p>Assign Leads</p>
+        </a></li>
+      <li class="nav-item"><a class="nav-link">
+          <i class="fa fa-handshake-o" aria-hidden="true"></i>
+          <p>Assign Garages</p>
+        </a></li> -->
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,106 @@
+<div>
+  <h4 class="hidden-md hidden-lg">Commercial Agreement - USP - Agreed Deals</h4>
+  <table class="table table-bordered" style="width: 100%; margin: auto;">
+    <tbody>
+    </tbody>
+  </table>
+  <div class="category_list">
+    <form>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-bordered black-heading">
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">Value
+                </th>
+                <th scope="col">Unit
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of entityMaster">
+                <td><b> {{item.CatName}} on
+                    {{item.EntityName}}</b> <span style=" color: #f70a0a; ">*</span>
+
+                  <span error class="error" *ngIf="USPForm[item.EntityId+'-value-error'] && isSubmitted"
+                    style="float:right;font-size: 11px;"> *Please
+                    fill correct value and unit.</span></td>
+                <td>
+                  <app-qfc-input>
+                    <input input type="text" maxlength="2" class="form-control login"
+                      [(ngModel)]="USPForm[item.EntityId+'-value']" [ngModelOptions]="{standalone: true}"
+                      placeholder="Enter {{item.CatName}} on {{item.EntityName}}" name="mobile" required>
+                  </app-qfc-input>
+                </td>
+                <td *ngIf="item.CatId === 1|| item.CatId===2">
+                  <select class="form-control" input required [(ngModel)]="USPForm[item.EntityId+'-type']"
+                    [ngModelOptions]="{standalone: true}">
+                    <option value="">Select Unit</option>
+                    <option value="p">%</option>
+                    <!-- <option value="rs">Rs</option> -->
+                  </select>
+                </td>
+
+                <!-- <td *ngIf="item.CatId === 3">
+                    <select class="form-control" input required [(ngModel)]="USPForm[item.EntityId+'-type']"
+                      [ngModelOptions]="{standalone: true}">
+                      <option value="">Select Unit</option>
+                      <option value="months">Months</option>
+                      <option value="kms">Kms</option>
+                    </select>
+                    <span error class="error" *ngIf="USPForm[item.EntityId+'-type-error'] && isSubmitted">Please
+                      select a correct value.</span>
+                  </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <label><input type="checkbox" [(ngModel)]="isAccept" name="isAccept" [disabled]='isAccept'> I
+              Accept to the term and condition of commercial agreement</label> -->
+        </div>
+        <div class="col-md-12 text-center"><button class="btn btn-primary" (click)="insertGarageUsp()">Submit
+            USPs</button>
+        </div>
+      </div>
+    </form>
+    <div class="row" *ngIf="false">
+      <div class="col-md-12">
+        <table class="table table-bordered black-heading">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Value</th>
+              <th scope="col">Unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let garageusp of garageUsp">
+              <td>
+                {{garageusp.CatName}} on {{garageusp.EntityName}}
+              </td>
+              <td>
+                {{garageusp.Value}}
+              </td>
+              <td *ngIf="garageusp.Unit === 'p'">
+                %
+              </td>
+              <!-- <td *ngIf="garageusp.Unit === 'rs'">
+                  Rs
+                </td>
+                <td *ngIf="garageusp.Unit === 'kms'">
+                  Kms
+                </td>
+                <td *ngIf="garageusp.Unit === 'months'">
+                  Months
+                </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

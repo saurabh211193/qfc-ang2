@@ -1,0 +1,45 @@
+<div class="my-5 login-page">
+  <div class="bg-ctrl"></div>
+  <div class="form-login">
+    <div class="text-center">
+      <img src="/assets/images/qfc-png.png">
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="inn-form">
+        <!-- <h2 class="text-center">Sign In</h2> -->
+        <div class="row">
+          <div class="col-md-12">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="name">Login Id</label>
+              <input input type="text" class="form-control login" formControlName="LoginId" required>
+              <span error class="error" *ngIf="formErrors.LoginId">{{formErrors.LoginId}}</span>
+            </app-qfc-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <app-qfc-input>
+              <label label class="form-control-placeholder" for="password">Password</label>
+              <input input type="password" class="form-control pass" formControlName="Password" required>
+              <span error class="error" *ngIf="formErrors.Password">{{formErrors.Password}}</span>
+            </app-qfc-input>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="checkbox">
+              <label> <input type="checkbox" formControlName="IsAutoAllocation"> Inbound Login</label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-button">
+              <button type="submit" class="btn btn-primary submit">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

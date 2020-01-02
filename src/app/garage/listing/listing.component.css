@@ -1,0 +1,67 @@
+.garage-list {
+  padding: 32px 10px 10px 10px;
+}
+
+.garage-list .table thead {
+  /* background: #c5c7ca; */
+}
+
+.garage-list .table td,
+.garage-list .table th {
+  padding: .4rem .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+
+.garage-list-anchor_edit {
+  color: #007bff;
+}
+
+.garage-list-anchor_register {
+  color: #0aff05;
+}
+
+.garage-list-anchor_rejected {
+  color: #ff0505;
+}
+
+.sort_up {
+  position: relative;
+  margin-left: 5px;
+  width: auto;
+  display: inline-block;
+}
+
+
+/* span.sort_up span {
+  height: 5px;
+  float: left;
+  width: 100%;
+} */
+.sort_up .fa {
+  height: auto;
+  font-size: 18px;
+  width: 100%;
+  float: left;
+}
+
+.down-arrow {
+  border-color: #4e4c4c transparent;
+  border-style: solid;
+  border-width: 8px 5px 0px 5px;
+  height: 0px;
+  width: 0px;
+  position: relative;
+  top: 23px;
+  left: -10px;
+}
+
+.up-arrow {
+  border-color: #4e4c4c transparent;
+  border-style: solid;
+  border-width: 0px 5px 8px 5px;
+  height: 0px;
+  width: 0px;
+  position: relative;
+  top: -18px;
+}

@@ -1,0 +1,9 @@
+.container-fluid{
+  padding: 10px;
+}
+.heading{
+  margin: 0px 0 20px 0;
+  font-size: 1.25rem;
+    font-weight: 600;
+    color: #232323;
+}

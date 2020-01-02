@@ -1,0 +1,153 @@
+/* You can add global styles to this file, and also import other style files */
+.error {
+  color: red;
+  font-size: 1rem;
+}
+
+body {
+  background-color: #eee !important;
+  overflow-x: hidden;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #ff8214 !important;
+  border-color: #ff8214 !important;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  background-color: #d17522 !important;
+  border-color: #d17522 !important;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show>.btn-primary.dropdown-toggle {
+  color: #fff;
+  background-color: #d17522 !important;
+  border-color: #d17522 !important;
+}
+
+.save {
+  background-color: #5cb860 !important;
+  border-color: #5cb860 !important;
+}
+
+.cancel {
+  background-color: #f55a4e !important;
+  border-color: #f55a4e !important;
+}
+
+.save:hover {
+  background-color: #7fec84 !important;
+  border-color: #7fec84 !important;
+}
+
+.cancel:hover {
+  background-color: #f5938c !important;
+  border-color: #f5938c !important;
+}
+
+/*popup*/
+.pop_window {
+  position: fixed;
+  background: rgba(104, 104, 104, 0.81);
+  z-index: 10;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  overflow: auto;
+  height: 100%;
+}
+
+.pop_window>div {
+  position: relative;
+  margin: 0px auto;
+  max-width: 80%;
+  width: 100%;
+  background: #fff;
+  top: 12.5%;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.pop_window .popup-heading .col-md-3 {
+  text-align: right;
+}
+
+.pop_window .popup-heading .col-md-3 button {
+  border: none;
+  background: #fff;
+  font-size: 18px;
+  color: #736e6e;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  cursor: pointer;
+}
+
+.container-fluid.pop_window .popup-heading {
+  margin-bottom: 10px;
+}
+
+/* garage details */
+.details_service span .form-group {
+  display: inline;
+}
+.details_service span label{
+  margin: 2px 8px;
+}
+/*end popup */
+
+
+/* header fixed */
+
+.nav-garage {
+  position: fixed !important;
+  z-index: 10;
+}
+.main_sidebar{
+  position: fixed;
+  top: 57px;
+  z-index: 10;
+}
+.main_panel .col-a.col-b-10{
+  margin-left: 65px;
+  margin-top: 60px;
+}
+.form-group  .form-control-placeholder{
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+.multiselect-dropdown .dropdown-btn .dropdown-down,.multiselect-dropdown .dropdown-btn .dropdown-up{
+  border-left: 5px solid transparent !important;
+  border-right: 5px solid transparent !important;
+}
+
+.fa-phone{
+  cursor:pointer;
+}
+.btn.btn-primary.save{
+  background-color: #ff8214 !important;
+  border-color: #ff8214 !important;
+}
+.btn.btn-primary.cancel{
+  background-color: #969390 !important;
+  border-color: #969390 !important;
+}
+.assignment-table tr td .form-group{
+  margin-bottom: 0;
+}
+.category_list .table td .form-group{
+  margin-bottom: 0;
+}
+input[type=number]::-webkit-inner-spin-button,input[type=date]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button ,input[type=date]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

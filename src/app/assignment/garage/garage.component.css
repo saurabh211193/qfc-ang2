@@ -1,0 +1,22 @@
+.container-fluid {
+  padding: 32px 10px 10px 10px;
+}
+
+table.table.table-bordered input {
+  width: 18px;
+}
+
+input[type="checkbox"]:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+.table td {
+  padding: 7px .75rem;
+  vertical-align: middle;
+}
+
+.anchor_link {
+  color: #ff8214;
+  cursor: pointer;
+}

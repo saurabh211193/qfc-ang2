@@ -1,0 +1,131 @@
+<div class="container-fluid">
+  <!-- <div class="row">
+      <div class="col-md-12">
+        <h4 class="frm-hd">Heading section</h4>
+      </div>
+    </div> -->
+  <!-- <div class="row strip-panel">
+      <div class="col-lg-2 col-xs-6 small_block_agent" *ngFor="let status of statusCount;let i=index;">
+        <div class="small-box bg strip{{i}}" (click)="changeStatus(status.StatusId)">
+          <div class="inner">
+            <h3>{{status.Total}}</h3>
+            <p>{{status.StatusName}}</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-document-text"></i>
+          </div>
+          <a class="small-box-footer" href="javascript:void(0);">More info <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div> -->
+  <div class="row">
+    <div class="col-md-3">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="name">Agents</label>
+        <select input class="form-control" [(ngModel)]="selectedAgent">
+          <option value="">--Select--</option>
+          <option *ngFor="let agent of agents" value="{{agent.UserId}}">{{agent.Name + '(' + agent.LoginId + ')'}}
+          </option>
+        </select>
+      </app-qfc-input>
+    </div>
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-primary" (click)="assignGarages()">Assign</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <app-qfc-input>
+        <label label class="form-control-placeholder" for="city">City/State</label>
+        <select input class="form-control" [(ngModel)]="selectedCity">
+          <option value="ALL">--Select City--</option>
+          <option *ngFor="let city of cities" value="{{city.Name}}">{{city.Name}}</option>
+        </select>
+      </app-qfc-input>
+    </div>
+    <div class="col-md-1">
+      <button type="submit" class="btn btn-primary" (click)="getGaragesOnCityFilter()">Search</button>
+    </div>
+  </div>
+  <!-- <form class="" [formGroup]="filterForm" (ngSubmit)="getUnassignedLeads()">
+      <div class="row">
+        <div class="col-md-1">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="name">Id</label>
+            <input input type="number" class="form-control" formControlName="leadid" [value]="" min="1">
+          </app-qfc-input>
+        </div>
+        <div class="col-md-2">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="name">Mobile No.</label>
+            <input input type="text" class="form-control" formControlName="mobileno">
+          </app-qfc-input>
+        </div>
+        <div class="col-md-2">
+          <app-qfc-input>
+            <label label class="form-control-placeholder" for="name">Source</label>
+            <select input class="form-control" formControlName="leadsource">
+              <option value="">Both</option>
+              <option *ngFor="let type of leadType" value="{{type}}">{{type}}</option>
+            </select>
+          </app-qfc-input>
+        </div>
+        <div class="col-md-1">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </div>
+    </form> -->
+
+  <table class="table table-bordered assignment-table">
+    <thead>
+      <tr>
+        <th>
+          Select
+        </th>
+        <th>
+          GarageId
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+          City
+        </th>
+        <th>
+          Pincode
+        </th>
+        <th>
+          Assigned To
+        </th>
+        <th>
+          Status
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let garage of garages">
+        <td>
+          <app-qfc-input>
+            <input input type="checkbox" class="form-control" (click)="addGarageId(garage.GarageId)">
+          </app-qfc-input>
+        </td>
+        <td (click)="getGarageDetail(garage.GarageId)" class="anchor_link">{{garage.GarageId}}</td>
+        <td>{{garage.Name}}</td>
+        <td>{{garage.City}}</td>
+        <td>{{garage.Pincode}}</td>
+        <td>
+          <span *ngIf="garage.EmployeeId">{{garage.UserName + '(' +garage.EmployeeId + ')'}}</span>
+
+        </td>
+        <td>
+          <ng-container *ngIf="garage.IsAgree"><span>Registered</span></ng-container>
+
+          <ng-container *ngIf="!garage.IsAgree"><span>Not Registered</span></ng-container>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- <app-pagination *ngIf="pagination.totalPages>1" [pagination]="pagination" (PageChange)="PageChanged($event)"></app-pagination> -->
+</div>

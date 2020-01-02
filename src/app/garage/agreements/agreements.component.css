@@ -1,0 +1,123 @@
+.container-fluid.main {
+  margin-top: 84px;
+  padding-top: 10px;
+  padding-bottom: 125px;
+}
+
+h4 {
+  margin-left: 17px;
+}
+
+.input_file_design {
+  background: #fff;
+  padding: 0px;
+  border-radius: 4px;
+  margin-left: 7.5%;
+}
+
+.upload_section {
+  margin-bottom: 10px;
+}
+
+.upload_section span {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #fff;
+  border-top: none;
+}
+
+.col-md-6 .table>thead>tr>th {
+  color: #000;
+}
+
+.input_file_design .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  text-align: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.input_file_design h3 {
+  margin: 10px 20px;
+}
+
+.input_file_design .btnn {
+  border: 2px dotted gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  max-width: 340px;
+}
+
+.input_file_design .upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.commercial_rate .row {
+  background: #fff;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.commercial_rate h2 {
+  font-size: 24px;
+}
+
+.commercial_rate .row .col-md-6 {
+  margin: 0;
+}
+
+.input_file_design select {
+  margin-top: 7px;
+}
+
+.black-heading tr th {
+  color: #000;
+}
+
+.footer_ctrl {
+  bottom: 0;
+}
+
+.heading h4.pull-left {
+  margin-left: 0;
+}
+
+.heading p.pull-right {
+  margin: 10px 0;
+  cursor: pointer;
+  color: dodgerblue;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media(max-width:640px) {
+  .container-fluid.main {
+    margin-top: 64px;
+    padding-left: 0;
+    margin-bottom: 10px;
+  }
+  .container.booking_hist {
+    padding: 0;
+  }
+  .input_file_design {
+    margin-left: 15px;
+  }
+}

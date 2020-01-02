@@ -1,0 +1,55 @@
+.section-inner {
+  padding: 10px 10px;
+  border-top: 2px solid #ff8214;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.47);
+  background: #fff;
+  margin: 0 0 10px 0;
+}
+
+.row.heading {
+  margin-bottom: 20px;
+}
+
+.row.heading .col-md-3 {
+  text-align: right;
+  color: #ff8214;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fa-phone {
+  position: absolute;
+  top: 10px;
+  right: 24px;
+  color: #0ed00e;
+}
+
+.anchor-link {
+  cursor: pointer;
+  color: #40aff8;
+}
+
+.sms-link {
+  color: #ff8214;
+  cursor: pointer;
+}
+.col-a75,.col-a25{
+  float: left;
+}
+.col-a75{
+  width:75%;
+}
+.col-a25{
+  width:25%;
+  padding:0 0px 0 10px;
+}
+.service-advisor{
+  margin-top: 10px;
+}
+ .service-advisor .fa-phone{
+  position: static;
+  right:0;
+  top:0;
+  font-size:18px;
+}
